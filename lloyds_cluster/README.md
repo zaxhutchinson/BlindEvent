@@ -6,7 +6,7 @@ Clustering using Lloyd's algorithm
 Code by zax
 
 c++ implementation is a translation (with modifications) of the python code 
-found here: https:datasciencelab.wordpress.com/tag/lloyds-algorithm/
+found here: https://datasciencelab.wordpress.com/tag/lloyds-algorithm/
 
 Requires the vec2.hpp file.
 
