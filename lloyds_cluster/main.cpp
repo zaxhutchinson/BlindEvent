@@ -73,17 +73,17 @@ int main(int argc, char** argv) {
 
     std::random_device rd;
     std::mt19937_64 rng(rd());
-    std::uniform_real_distribution<double> xDist(0,100.0);
-    std::uniform_real_distribution<double> yDist(0,100.0);
+    std::uniform_real_distribution<double> xDist(0,1000.0);
+    std::uniform_real_distribution<double> yDist(0,1000.0);
     std::uniform_real_distribution<double> gDist(0.8,0.9);
-    std::uniform_real_distribution<double> dDist1(0.0,5.0);
-    std::uniform_real_distribution<double> dDist2(0.0,10.0);
+    std::uniform_real_distribution<double> dDist1(0.0,3.0);
+    std::uniform_real_distribution<double> dDist2(0.0,40.0);
 
     vec<Vec2> points;
     vec<double> gravities;
 
-    unsigned num_densities1 = 100;
-    unsigned num_densities2 = 100;
+    unsigned num_densities1 = 10;
+    unsigned num_densities2 = 50;
     vec<pair<Vec2,double>> densities1;
     vec<pair<Vec2,double>> densities2;
 
@@ -98,15 +98,16 @@ int main(int argc, char** argv) {
         Vec2 p(xDist(rng),yDist(rng));
         std::uniform_real_distribution<double> dDistA(0.0,dDist2(rng));
         std::uniform_real_distribution<double> dDistB(0.0,dDistA(rng));
-        densities2.push_back(std::make_pair(p,dDistB(rng)));
+        std::uniform_real_distribution<double> dDistC(0.0,dDistB(rng));
+        densities2.push_back(std::make_pair(p,dDistC(rng)));
     }
     
     GeneratePoints(points,densities1,2,1000.0,1000.0,5,5);
-    GeneratePoints(points,densities2,2,1000.0,1000.0,9,9);
+    GeneratePoints(points,densities2,1,1000.0,1000.0,15,15);
 
     vec<Vec2> centers;
     umap<unsigned, vec<Vec2>> clusters;
-    KMeansCluster(points,20,0.000000001,centers,clusters);
+    KMeansCluster(points,40,0.000000001,centers,clusters);
 
     std::ofstream ofs("data");
     for(umap<unsigned,vec<Vec2>>::iterator it = clusters.begin(); it != clusters.end(); it++) {
