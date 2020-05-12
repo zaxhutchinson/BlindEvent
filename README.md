@@ -5,3 +5,4 @@ This repo contains code bits and bobs discussed in my blog: leftatzax.wordpress.
 
 * Clustering w/Lloyd's Algorithm
 * Clustering w/Fuzzy C Means
+* MNISTReader
